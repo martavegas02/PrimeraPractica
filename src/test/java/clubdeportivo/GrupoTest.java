@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class GrupoTest {
     @Test
-    @DisplayName("Test Grupo")
+    @DisplayName("Comprobar la excepción de numero de plazas")
     public void Grupo_nplazas_menor0() throws ClubException {
         //Arrange
         //Act
