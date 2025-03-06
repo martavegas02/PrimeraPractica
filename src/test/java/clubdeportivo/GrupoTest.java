@@ -92,5 +92,123 @@ public class GrupoTest {
         //Assert
         assertEquals(0, plazasLibres);
     }
+    @Test
+    public void actualizarPlazas_correcto() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        g.actualizarPlazas(15);
+        //Assert
+        assertEquals(15, g.getPlazas());
+    }
+    @Test 
+    public void actualizarPlazas_NmenorIgual0() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> g.actualizarPlazas(0));
+    }
+    @Test
+    public void actualizarPlazas_NmenorMatriculados() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> g.actualizarPlazas(9));
+    }
+    @Test
+    public void matricular_correcto() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",20,10,25.0);
+        //Act
+        g.matricular(5);
+        //Assert
+        assertEquals(15, g.getMatriculados());
+    }
+    @Test
+    public void matricular_NmenorIgual0() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> g.matricular(0));
+    }
+    @Test
+    public void matricular_NmayorPlazasLibres() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> g.matricular(1));
+    }
+    @Test
+    public void toString_test() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        String toString = g.toString();
+        //Assert
+        assertEquals("(123A - zumba - 25.0 euros - P:10 - M:10)", toString);
+    }
+    @Test
+    public void equals_trueCodigoYActividad() throws ClubException{
+        //Arrange
+        Grupo g1 = new Grupo("123A","zumba",10,10,25.0);
+        Grupo g2 = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        boolean equals = g1.equals(g2);
+        //Assert
+        assertEquals(true, equals);
+    }
+    @Test
+    public void equals_falseCodigoYActividad() throws ClubException{
+        //Arrange
+        Grupo g1 = new Grupo("123A","zumba",10,10,25.0);
+        Grupo g2 = new Grupo("123B","zumba",10,10,25.0);
+        //Act
+        boolean equals = g1.equals(g2);
+        //Assert
+        assertEquals(false, equals);
+    }
+    @Test
+    public void equals_CodigoTrue_ActividadFalse() throws ClubException{
+        //Arrange
+        Grupo g1 = new Grupo("123A","zumba",10,10,25.0);
+        Grupo g2 = new Grupo("123A","pilates",10,10,25.0);
+        //Act
+        boolean equals = g1.equals(g2);
+        //Assert
+        assertEquals(false, equals);
+    }
+    @Test
+    public void equals_CodigoFalse_ActividadTrue() throws ClubException{
+        //Arrange
+        Grupo g1 = new Grupo("123A","zumba",10,10,25.0);
+        Grupo g2 = new Grupo("123B","zumba",10,10,25.0);
+        //Act
+        boolean equals = g1.equals(g2);
+        //Assert
+        assertEquals(false, equals);
+    }
+    @Test
+    public void equals_notInstanceOfGrupo() throws ClubException {
+        //Arrange
+        Grupo g1 = new Grupo("123A", "zumba", 10, 10, 25.0);
+        String notGrupo = "Not a Grupo instance";
+        //Act
+        boolean equals = g1.equals(notGrupo);
+        //Assert
+        assertEquals(false, equals);
+    }
+    @Test
+    public void hashCode_correcto() throws ClubException{
+        //Arrange
+        Grupo g = new Grupo("123A","zumba",10,10,25.0);
+        //Act
+        int hashCode = g.hashCode();
+        //Assert
+        assertEquals(g.getCodigo().toUpperCase().hashCode()+g.getActividad().toUpperCase().hashCode(), hashCode);
+    }
     
 }
