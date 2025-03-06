@@ -2,12 +2,12 @@ package clubdeportivo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class GrupoTest {
     @Test
-    @Display("Test Grupo")
+    @DisplayName("Test Grupo")
     public void Grupo_nplazas_menor0() throws ClubException {
         //Arrange
         //Act
