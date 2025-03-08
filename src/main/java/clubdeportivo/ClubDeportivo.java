@@ -82,6 +82,7 @@ public class ClubDeportivo {
 					npersonas -= plazasGrupo;
 				} else {
 					grupos[i].matricular(npersonas);
+					npersonas=0;
 				}
 			}
 			i++;

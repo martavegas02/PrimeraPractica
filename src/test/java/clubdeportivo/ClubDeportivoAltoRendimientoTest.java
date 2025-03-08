@@ -60,10 +60,10 @@ public class ClubDeportivoAltoRendimientoTest {
         //Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 5, 1);
         //Act
-        cd.anyadirActividad(new String[] {"Zumba", "Mañana", "15", "5", "20.0"});
+        Grupo g = new Grupo("Zumba", "Mañana", 15, 5, 20.0);
+        cd.anyadirActividad(g);
         //Assert
-        Grupo g = cd.getActividad();
-        assertEquals(10, g.getPlazas());
+        assertEquals(10, g.plazasLibres());
         
     }
     
