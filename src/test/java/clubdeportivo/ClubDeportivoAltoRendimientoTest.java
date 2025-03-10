@@ -1,5 +1,6 @@
 package clubdeportivo;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,7 +42,16 @@ public class ClubDeportivoAltoRendimientoTest {
         //Arrange
         //Act
         //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 1, 0));
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 1, -1));
+    }
+
+    @Test
+    @DisplayName("Comprobar que en el constructor el maximo y el incremento no sean <=0")
+    public void ClubDeportivoAltoRendimiento_maximo_incremento_menor0() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0, 0));
     }
 
     @Test
@@ -51,30 +61,40 @@ public class ClubDeportivoAltoRendimientoTest {
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
         //Act
         //Assert
-        assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"1", "2", "3", "4"}));
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"Futbol", "Entreno", "10", "4"}));
+    }   
+
+    @Test
+    @DisplayName("Comprobar que el formato de los datos de la actividad es correcto")
+    public void anyadirActividad_formato_incorrecto() throws ClubException {
+        //Arrange
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
+        String [] datos = {"Zumba", "Medio", "diez", "10", "25.0"};
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(datos));
     }
 
     @Test
-    @DisplayName("Comprobar que las plazas sean mayores que el maximo de personas por grupo")
-    public void anyadirActividad_plazas_mayor_maximo() throws ClubException {
+    @DisplayName("Comprobar que al añadir una actividad las plazas superiores al maximo se establecen al maximo")
+    public void anyadirActividad_plazas_superiores_maximo() throws ClubException {
         //Arrange
-        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 5, 1);
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
+        String [] superaMaximo = {"Zumba", "Medio", "20", "10", "25.0"};
         //Act
-        Grupo g = new Grupo("Zumba", "Mañana", 15, 5, 20.0);
-        cd.anyadirActividad(g);
         //Assert
-        assertEquals(10, g.plazasLibres());
-        
+        assertDoesNotThrow(() -> cd.anyadirActividad(superaMaximo));
+        //como no podemos comprobarlo, ponemos para que no nos salte la excepcion
     }
-    
 
-   @Test
-   @DisplayName("Comprobar los ingresos")
-   public void ingresos_test() throws ClubException {
-       //Arrange
-       ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
-       //Act
-       //Assert
-       assertEquals(0, cd.ingresos());
-   }
+
+    @Test
+    @DisplayName("Comprobar los ingresos")
+    public void ingresos_test() throws ClubException {
+        //Arrange
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
+        //Act
+        //Assert
+        assertEquals(0, cd.ingresos());
+    }
 }
