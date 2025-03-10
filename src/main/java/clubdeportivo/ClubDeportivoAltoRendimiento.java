@@ -33,6 +33,7 @@ public class ClubDeportivoAltoRendimiento extends ClubDeportivo{
 			int plazas = Integer.parseInt(datos[2]);
 			int matriculados = Integer.parseInt(datos[3]);
 			double tarifa = Double.parseDouble(datos[4]);
+
 			if (plazas > maximoPersonasGrupo) {
 				plazas=maximoPersonasGrupo;
 			}

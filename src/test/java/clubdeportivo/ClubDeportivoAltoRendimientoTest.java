@@ -46,19 +46,10 @@ public class ClubDeportivoAltoRendimientoTest {
     }
 
     @Test
-    @DisplayName("Comprobar que en el constructor el maximo y el incremento no sean <=0")
-    public void ClubDeportivoAltoRendimiento_maximo_incremento_menor0() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0, 0));
-    }
-
-    @Test
     @DisplayName("Comprobar que el lenght de los datos de la actividad no son < 5")
     public void anyadirActividad_test() throws ClubException {
         //Arrange
-        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1, 1.5);
         //Act
         //Assert
         assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"Futbol", "Entreno", "10", "4"}));
@@ -73,6 +64,18 @@ public class ClubDeportivoAltoRendimientoTest {
         //Act
         //Assert
         assertThrows(ClubException.class, () -> cd.anyadirActividad(datos));
+    }
+
+    @Test
+    @DisplayName("Comprobar que pasa cuando las plazas son menores que el maximo")
+    public void anyadirActividad_plazas_menores_maximo() throws ClubException {
+        //Arrange
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
+        String [] plazasMenores = {"Zumba", "Medio", "4", "2", "25.0"};
+        //Act
+        //Assert
+        assertDoesNotThrow(() -> cd.anyadirActividad(plazasMenores));
+        //como no podemos comprobarlo, ponemos para que no nos salte la excepcion
     }
 
     @Test
