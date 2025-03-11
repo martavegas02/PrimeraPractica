@@ -40,6 +40,15 @@ public class ClubDeportivoTest {
     }
 
     @Test
+    @DisplayName("Comprobar que el nombre del constructor no sea nulo")
+    public void ClubDeportivo_nombre_nulo() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new ClubDeportivo(null, 1));
+    }
+
+    @Test
     @DisplayName("Comprobar que al añadir una actividad se añada correctamente")
     public void anyadirActividad_test() throws ClubException {
         //Arrange
