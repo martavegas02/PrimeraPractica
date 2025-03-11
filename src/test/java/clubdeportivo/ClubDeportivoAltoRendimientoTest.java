@@ -25,6 +25,15 @@ public class ClubDeportivoAltoRendimientoTest {
     }
 
     @Test
+    @DisplayName("Comprobar el constructor que el nombre no sea null")
+    public void ClubDeportivoAltoRendimiento_nombre_null() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 1, 1));
+    }
+
+    @Test
     @DisplayName("Comprobar el constructor que el incremento no sea <=0")
     public void ClubDeportivoAltoRendimiento_incremento_menor0() throws ClubException {
         //Arrange
@@ -49,6 +58,15 @@ public class ClubDeportivoAltoRendimientoTest {
         //Act
         //Assert
         assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 1, -1));
+    }
+
+    @Test
+    @DisplayName("Comprobar el constructor que el nombre no sea null")
+    public void ClubDeportivoAltoRendimiento_incremento_nombre_null() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 2, 1, 1));
     }
 
     @Test
