@@ -130,6 +130,8 @@ public class ClubDeportivoTest {
         //Assert
         assertEquals(13, total);
     }
+
+    
     @Test
     @DisplayName("Matricular test")
     void matricular_test() throws ClubException {

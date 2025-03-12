@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class GrupoTest {
+
     @Test
     @DisplayName("Comprobar la excepción de numero de plazas")
     public void Grupo_nplazas_menor0() throws ClubException {
@@ -13,6 +14,24 @@ public class GrupoTest {
         //Act
         //Assert
         assertThrows(ClubException.class, () -> new Grupo(null, null, 0, 0, 1));
+    }
+
+    @Test
+    @DisplayName("Comprobar la excepcion de codigo nulo")
+    public void Grupo_codigo_nulo() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new Grupo(null, "zumba", 1, 1, 1));
+    }
+
+    @Test
+    @DisplayName("Comprobar la excepcion de actividad nula")
+    public void Grupo_actividad_nula() throws ClubException {
+        //Arrange
+        //Act
+        //Assert
+        assertThrows(ClubException.class, () -> new Grupo("123A", null, 1, 1, 1));
     }
 
     @Test

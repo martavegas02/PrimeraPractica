@@ -22,6 +22,7 @@ public class ClubDeportivo {
 		}
 
 		this.nombre = nombre;
+		//posible error porque grupos empieza en 0 y no esta permitido por la excepcion
 		grupos = new Grupo[n];
 	}
 
@@ -87,7 +88,8 @@ public class ClubDeportivo {
 					npersonas -= plazasGrupo;
 				} else {
 					grupos[i].matricular(npersonas);
-					npersonas=0;
+					//plazasGrupo -= npersonas;
+					npersonas = 0;
 				}
 			}
 			i++;
