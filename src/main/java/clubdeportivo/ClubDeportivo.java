@@ -20,6 +20,7 @@ public class ClubDeportivo {
 		if (nombre == null) {
 			throw new ClubException("ERROR: el nombre del club no puede ser nulo");
 		}
+		
 		this.nombre = nombre;
 		grupos = new Grupo[n];
 	}
