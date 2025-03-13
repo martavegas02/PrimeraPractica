@@ -1,6 +1,5 @@
 package clubdeportivo;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -9,114 +8,107 @@ import org.junit.jupiter.api.Test;
 
 public class ClubDeportivoAltoRendimientoTest {
 
-    //comentario
     @Test
-    @DisplayName("Comprobar el constructor que el numero maximo de personas por grupo no sea <=0")
-    public void ClubDeportivoAltoRendimiento_maximo_menor0() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 0, 1));
+    @DisplayName("Comprobar que el constructor no permite número máximo de personas <= 0")
+    public void ClubDeportivoAltoRendimiento_maximo_menor0() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 0, 1),
+            "Se esperaba una excepción cuando el número máximo de personas es menor o igual a 0");
     }
-
+    
     @Test
-    @DisplayName("Comprobar el constructor que el nombre no sea null")
-    public void ClubDeportivoAltoRendimiento_nombre_null() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 1, 1));
+    @DisplayName("Comprobar que el constructor no permite nombre null")
+    public void ClubDeportivoAltoRendimiento_nombre_null() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 1, 1),
+            "Se esperaba una excepción cuando el nombre es null");
     }
-
+    
     @Test
-    @DisplayName("Comprobar el constructor que el incremento no sea <=0")
-    public void ClubDeportivoAltoRendimiento_incremento_menor0() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0));
+    @DisplayName("Comprobar que el constructor no permite incremento <= 0")
+    public void ClubDeportivoAltoRendimiento_incremento_menor0() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0),
+            "Se esperaba una excepción cuando el incremento es menor o igual a 0");
     }
-
+    
     @Test
-    @DisplayName("Comprobar el constructor que el numero maximo de personas por grupo no sea <=0")
-    public void ClubDeportivoAltoRendimiento_maximo_tam_menor0() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0, 1));
+    @DisplayName("Comprobar que el constructor con tamaño no permite número máximo de personas <= 0")
+    public void ClubDeportivoAltoRendimiento_maximo_tam_menor0() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 0, 1),
+            "Se esperaba una excepción cuando el número máximo de personas con tamaño es menor o igual a 0");
     }
-
+    
     @Test
-    @DisplayName("Comprobar el constructor que el incremento no sea <=0")
-    public void ClubDeportivoAltoRendimiento_incremento_tam_menor0() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 1, -1));
+    @DisplayName("Comprobar que el constructor con tamaño no permite incremento <= 0")
+    public void ClubDeportivoAltoRendimiento_incremento_tam_menor0() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento("Club", 1, 1, -1),
+            "Se esperaba una excepción cuando el incremento con tamaño es menor o igual a 0");
     }
-
+    
     @Test
-    @DisplayName("Comprobar el constructor que el nombre no sea null")
-    public void ClubDeportivoAltoRendimiento_incremento_nombre_null() throws ClubException {
-        //Arrange
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 2, 1, 1));
+    @DisplayName("Comprobar que el constructor con tamaño no permite nombre null")
+    public void ClubDeportivoAltoRendimiento_incremento_nombre_null() {
+        assertThrows(ClubException.class, () -> new ClubDeportivoAltoRendimiento(null, 2, 1, 1),
+            "Se esperaba una excepción cuando el nombre es null");
     }
-
+    
     @Test
-    @DisplayName("Comprobar que el lenght de los datos de la actividad no son < 5")
+    @DisplayName("Comprobar que el tamaño del array de actividad no es menor a 5")
     public void anyadirActividad_test() throws ClubException {
-        //Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1, 1.5);
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"Futbol", "Entreno", "10", "4"}));
-    }   
-
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"Futbol", "Entreno", "10", "4"}),
+            "Se esperaba una excepción porque el array de actividad tiene menos de 5 elementos");
+    }
+    
     @Test
-    @DisplayName("Comprobar que el formato de los datos de la actividad es correcto")
+    @DisplayName("Comprobar que el formato de los datos de la actividad es incorrecto")
     public void anyadirActividad_formato_incorrecto() throws ClubException {
-        //Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
-        String [] datos = {"Zumba", "Medio", "diez", "10", "25.0"};
-        //Act
-        //Assert
-        assertThrows(ClubException.class, () -> cd.anyadirActividad(datos));
+        String[] datos = {"Zumba", "Medio", "diez", "10", "25.0"};
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(datos),
+            "Se esperaba una excepción porque el formato de los datos es incorrecto");
     }
-
+    
     @Test
-    @DisplayName("Comprobar que pasa cuando las plazas son menores que el maximo")
+    @DisplayName("Comprobar que se puede añadir una actividad con plazas menores que el máximo permitido")
     public void anyadirActividad_plazas_menores_maximo() throws ClubException {
-        //Arrange
+        // Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
-        String [] plazasMenores = {"Zumba", "Medio", "4", "2", "25.0"};
-        //Act
-        //Assert
-        assertDoesNotThrow(() -> cd.anyadirActividad(plazasMenores));
-        //como no podemos comprobarlo, ponemos para que no nos salte la excepcion
+        String[] plazasMenores = {"Zumba", "Medio", "4", "2", "25.0"};
+    
+        // Act
+        cd.anyadirActividad(plazasMenores);
+        int plazasLibres = cd.plazasLibres("Zumba");
+    
+        // Assert
+        assertEquals(0, plazasLibres, "Las plazas disponibles después de añadir la actividad no son las esperadas.");
     }
-
+    
     @Test
-    @DisplayName("Comprobar que al añadir una actividad las plazas superiores al maximo se establecen al maximo")
+    @DisplayName("Comprobar que al añadir una actividad con plazas superiores al máximo se ajusta correctamente")
     public void anyadirActividad_plazas_superiores_maximo() throws ClubException {
-        //Arrange
+        // Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
-        String [] superaMaximo = {"Zumba", "Medio", "20", "10", "25.0"};
-        //Act
-        //Assert
-        assertDoesNotThrow(() -> cd.anyadirActividad(superaMaximo));
-        //como no podemos comprobarlo, ponemos para que no nos salte la excepcion
+        String[] superaMaximo = {"natacion", "Medio", "20", "10", "25.0"};
+    
+        // Act
+        cd.anyadirActividad(superaMaximo);
+        int plazasLibres = cd.plazasLibres("natacion");
+    
+        // Assert
+        assertEquals(0, plazasLibres, "Las plazas disponibles no fueron ajustadas al máximo permitido.");
     }
-
-
+    
     @Test
-    @DisplayName("Comprobar los ingresos")
+    @DisplayName("Comprobar que los ingresos iniciales son cero")
     public void ingresos_test() throws ClubException {
-        //Arrange
+        // Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
-        //Act
-        //Assert
-        assertEquals(0, cd.ingresos());
+        double expectedIngresos = 0.0;
+    
+        // Act
+        double actualIngresos = cd.ingresos();
+    
+        // Assert
+        assertEquals(expectedIngresos, actualIngresos, "Los ingresos iniciales deberían ser cero.");
     }
+    
 }

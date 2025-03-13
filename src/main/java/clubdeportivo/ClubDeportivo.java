@@ -75,11 +75,16 @@ public class ClubDeportivo {
 		int p = 0;
 		int i = 0;
 		while (i < ngrupos) {
+			System.out.println("Revisando grupo: " + grupos[i].getActividad() + actividad);
+        	System.out.println("Plazas: " + grupos[i].getPlazas() + ", Matriculados: " + grupos[i].getMatriculados());
+			int plazasLibresGrupo = grupos[i].plazasLibres();
+        	System.out.println("Plazas libres en este grupo: " + plazasLibresGrupo);
 			if (grupos[i].getActividad().equals(actividad)) {
 				p += grupos[i].plazasLibres();
 			}
 			i++;
 		}
+		System.out.println("Total plazas libres para " + actividad + ": " + p);
 		return p;
 	}
 
