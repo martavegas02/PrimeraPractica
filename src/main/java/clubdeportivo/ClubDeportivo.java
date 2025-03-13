@@ -16,7 +16,10 @@ public class ClubDeportivo {
 		if (n <= 0) {
 			throw new ClubException("ERROR: el club no puede crearse con un número de grupos 0 o negativo");
 		}
-
+		//
+		//
+		//ERROR 
+		// NOMBRE TIENE QUE TENER COMPROBACION DE NULL 
 		if (nombre == null) {
 			throw new ClubException();
 		}
@@ -54,7 +57,13 @@ public class ClubDeportivo {
 			throw new ClubException("ERROR: el grupo es nulo");
 		}
 		int pos = buscar(g);
-		if (pos == -1) { // El grupo es nuevo
+		//
+		//
+		//ERROR
+		//si el numero de grupo es menor que grupo.length añade sino no 
+		//
+		//
+		if (pos == -1 && this.grupos.length > this.ngrupos) { // El grupo es nuevo
 			grupos[ngrupos] = g;
 			ngrupos++;
 		} else { // El grupo ya existe --> modificamos las plazas
@@ -88,7 +97,10 @@ public class ClubDeportivo {
 					npersonas -= plazasGrupo;
 				} else {
 					grupos[i].matricular(npersonas);
-					//plazasGrupo -= npersonas;
+					//
+					//
+					//ERROR
+					//HAY QUE ACTUALIZAR EL NUMERO DE PERSONAS A 0 
 					npersonas = 0;
 				}
 			}

@@ -14,7 +14,8 @@ public class Grupo {
 		if (matriculados>nplazas) {
 			throw new ClubException("ERROR: El número de plazas es menor que el de matriculados.");
 		}
-
+		//ERROR: 
+		//TENEMOS QUE COMPROBAR SI CODIGO Y ACTIVDAD SON VALIDOS, SINO SALTA EXCEPCION
 		if (codigo==null || actividad==null) {
 			throw new ClubException("ERROR: los datos no pueden ser nulos.");
 		}
