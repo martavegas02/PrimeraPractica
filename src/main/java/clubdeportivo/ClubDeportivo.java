@@ -41,6 +41,9 @@ public class ClubDeportivo {
 	}
 
 	public void anyadirActividad(String[] datos) throws ClubException {
+		if (datos.length<5) {
+			throw new ClubException ("ERROR: faltan datos");
+		}
 		try {
 			int plazas = Integer.parseInt(datos[2]);
 			int matriculados = Integer.parseInt(datos[3]);
@@ -61,11 +64,15 @@ public class ClubDeportivo {
 		//
 		//ERROR
 		//si el numero de grupo es menor que grupo.length añade sino no 
+		//NO PUEDES AÑADIR MAS ACTIVIADES A UN CLUB LLENO
 		//
-		//
-		if (pos == -1 && this.grupos.length > this.ngrupos) { // El grupo es nuevo
-			grupos[ngrupos] = g;
-			ngrupos++;
+		if (pos == -1){
+			if(this.grupos.length > this.ngrupos) { // El grupo es nuevo
+				grupos[ngrupos] = g;
+				ngrupos++;
+			}else{
+				throw new ClubException("ERROR: el club está lleno");
+			}
 		} else { // El grupo ya existe --> modificamos las plazas
 			grupos[pos].actualizarPlazas(g.getPlazas());
 		}
@@ -75,16 +82,11 @@ public class ClubDeportivo {
 		int p = 0;
 		int i = 0;
 		while (i < ngrupos) {
-			System.out.println("Revisando grupo: " + grupos[i].getActividad() + actividad);
-        	System.out.println("Plazas: " + grupos[i].getPlazas() + ", Matriculados: " + grupos[i].getMatriculados());
-			int plazasLibresGrupo = grupos[i].plazasLibres();
-        	System.out.println("Plazas libres en este grupo: " + plazasLibresGrupo);
 			if (grupos[i].getActividad().equals(actividad)) {
 				p += grupos[i].plazasLibres();
 			}
 			i++;
 		}
-		System.out.println("Total plazas libres para " + actividad + ": " + p);
 		return p;
 	}
 
@@ -105,7 +107,7 @@ public class ClubDeportivo {
 					//
 					//
 					//ERROR
-					//HAY QUE ACTUALIZAR EL NUMERO DE PERSONAS A 0 
+					//HAY QUE ACTUALIZAR EL NUMERO DE PERSONAS A 0 PARA QUE NO VUELVA A MATRICULAR EN OTRO GRUPO Y SALGA DEL BUCLE
 					npersonas = 0;
 				}
 			}

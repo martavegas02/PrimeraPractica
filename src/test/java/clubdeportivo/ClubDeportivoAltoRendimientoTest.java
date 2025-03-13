@@ -62,7 +62,7 @@ public class ClubDeportivoAltoRendimientoTest {
     @DisplayName("Comprobar que el formato de los datos de la actividad es incorrecto")
     public void anyadirActividad_formato_incorrecto() throws ClubException {
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 1, 1);
-        String[] datos = {"Zumba", "Medio", "diez", "10", "25.0"};
+        String[] datos = {"Medio", "Zumba", "diez", "10", "25.0"};
         assertThrows(ClubException.class, () -> cd.anyadirActividad(datos),
             "Se esperaba una excepción porque el formato de los datos es incorrecto");
     }
@@ -72,29 +72,29 @@ public class ClubDeportivoAltoRendimientoTest {
     public void anyadirActividad_plazas_menores_maximo() throws ClubException {
         // Arrange
         ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
-        String[] plazasMenores = {"Zumba", "Medio", "4", "2", "25.0"};
+        String[] plazasMenores = {"Medio", "Zumba", "4", "2", "25.0"};
     
         // Act
         cd.anyadirActividad(plazasMenores);
         int plazasLibres = cd.plazasLibres("Zumba");
     
         // Assert
-        assertEquals(0, plazasLibres, "Las plazas disponibles después de añadir la actividad no son las esperadas.");
+        assertEquals(2, plazasLibres, "Las plazas disponibles después de añadir la actividad no son las esperadas.");
     }
     
     @Test
     @DisplayName("Comprobar que al añadir una actividad con plazas superiores al máximo se ajusta correctamente")
     public void anyadirActividad_plazas_superiores_maximo() throws ClubException {
         // Arrange
-        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 10, 5);
-        String[] superaMaximo = {"natacion", "Medio", "20", "10", "25.0"};
+        ClubDeportivoAltoRendimiento cd = new ClubDeportivoAltoRendimiento("Club", 12, 5);
+        String[] superaMaximo = {"123A", "natacion", "20", "10", "25.0"};
     
         // Act
         cd.anyadirActividad(superaMaximo);
         int plazasLibres = cd.plazasLibres("natacion");
     
         // Assert
-        assertEquals(0, plazasLibres, "Las plazas disponibles no fueron ajustadas al máximo permitido.");
+        assertEquals(2, plazasLibres, "Las plazas disponibles no fueron ajustadas al máximo permitido.");
     }
     
     @Test

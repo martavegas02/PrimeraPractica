@@ -70,6 +70,18 @@ public class ClubDeportivoTest {
     }
 
     @Test
+    @DisplayName("Comprobar que el String[] de datos no falten datos")
+    public void anyadirActividad_faltanDatos() throws ClubException {
+        // Arrange
+        ClubDeportivo cd = new ClubDeportivo("Club", 1);
+
+        // Act & Assert
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(new String[] {"Futbol", "Entreno", "10", "4"}),
+            "Se esperaba una excepción porque el array de actividad tiene menos de 5 elementos");
+    }
+
+
+    @Test
     @DisplayName("Comprobar que al añadir una actividad con un grupo nulo")
     public void anyadirActividad_grupo_nulo() throws ClubException {
         // Arrange
@@ -137,6 +149,22 @@ public class ClubDeportivoTest {
         assertThrows(ClubException.class, () -> cd.anyadirActividad(grupo1),
             "Se esperaba una excepción al proporcionar un formato incorrecto en los datos del grupo.");
     }
+
+    @Test
+    @DisplayName("Comprobar que al añadir un grupo si el grupo es nuevo pero el club está lleno salta una excepción")
+    public void anyadirActividad_grupo_nuevo_club_lleno() throws ClubException {
+        // Arrange
+        ClubDeportivo cd = new ClubDeportivo("Club", 1);
+        Grupo g = new Grupo("123A", "zumba", 10, 10, 25.0);
+        Grupo g2 = new Grupo("123B", "zumba", 10, 10, 25.0);
+
+        // Act
+        cd.anyadirActividad(g);
+        // Act & Assert
+        assertThrows(ClubException.class, () -> cd.anyadirActividad(g2),
+            "Se esperaba una excepción al intentar añadir un grupo cuando el club está lleno.");
+    }
+
 
     @Test
     @DisplayName("Comprobar plazas libres para múltiples actividades")
