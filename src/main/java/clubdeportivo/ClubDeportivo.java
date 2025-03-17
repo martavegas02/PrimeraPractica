@@ -1,5 +1,9 @@
 package clubdeportivo;
 
+// Marta Vegas Cuevas 
+//Guillermo Sanz Nieto
+//Grupo G
+
 import java.util.StringJoiner;
 
 public class ClubDeportivo {

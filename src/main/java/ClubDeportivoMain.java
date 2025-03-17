@@ -1,7 +1,9 @@
 import clubdeportivo.ClubDeportivo;
 import clubdeportivo.ClubException;
 import clubdeportivo.Grupo;
-
+// Marta Vegas Cuevas 
+//Guillermo Sanz Nieto
+//Grupo G
 public class ClubDeportivoMain {
 	public static void main(String[] args) {
 		String [] grupo1 = {"123A","Kizomba","10","10","25.0"};

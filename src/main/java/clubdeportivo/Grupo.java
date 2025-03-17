@@ -1,5 +1,8 @@
 package clubdeportivo;
 
+// Marta Vegas Cuevas 
+//Guillermo Sanz Nieto
+//Grupo G
 public class Grupo {
 	private String codigo;
 	private String actividad;

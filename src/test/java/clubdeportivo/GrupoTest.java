@@ -1,3 +1,6 @@
+// Marta Vegas Cuevas 
+//Guillermo Sanz Nieto
+//Grupo G
 package clubdeportivo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
